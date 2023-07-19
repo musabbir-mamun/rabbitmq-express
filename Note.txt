@@ -1,0 +1,12 @@
+1. Download & install Erlang
+https://www.erlang.org/downloads
+
+2. Download & install Rabbit MQ (rabbitmq-server-3.12.2.exe)
+https://www.rabbitmq.com/install-windows.html
+
+3. Then go to start menu and search for rabbitmq command prompt
+
+4. Type command "rabbitmq-plugins enable rabbitmq_management"
+
+5. Go to http://localhost:15672
+Use username & password guest for both & login to Rabbit MQ dashboard
