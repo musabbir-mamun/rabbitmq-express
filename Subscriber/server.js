@@ -17,14 +17,17 @@ function receiveMessage(){
                 throw err;
             }
             
-            let queueName = "attendance";
+            let queueName = "recharge";
     
             channel.assertQueue(queueName,{
                 durable:false
             });
     
             channel.consume(queueName, (msg) => {
-                console.log(`Received: ${msg.content.toString()}`);
+                console.log('Received')
+                console.log(JSON.parse(msg.content));   // Receive JSON
+                //console.log(`Received: ${msg.content.toString()}`);  // Receive plain message
+                
             })
         })
     })

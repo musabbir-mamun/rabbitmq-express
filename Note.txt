@@ -10,3 +10,8 @@ https://www.rabbitmq.com/install-windows.html
 
 5. Go to http://localhost:15672
 Use username & password guest for both & login to Rabbit MQ dashboard
+
+
+Testing:
+Hit the URL below & check the response in console.
+http://localhost:3000/123456

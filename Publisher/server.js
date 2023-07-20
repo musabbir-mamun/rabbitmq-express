@@ -5,11 +5,11 @@ const app = express();
 const port = 3000;
 
 app.get('/:id', (req, res) => {
-    const userId = req.params.id;
-    publishMessage(userId, res);
+    const portNo = req.params.id;
+    publishMessage(portNo, res);
 });
 
-function publishMessage(data, res){
+function publishMessage(portNo, res){
 
     amqp.connect(`amqp://localhost`,(err,connection) => {
     if(err){
@@ -21,19 +21,25 @@ function publishMessage(data, res){
             throw err;
         }
         
-        let queueName = "attendance";
-        let message = "Insert attendance "+data;
+        let queueName = "recharge";
 
         channel.assertQueue(queueName,{
             durable:false
         });
 
-        channel.sendToQueue(queueName, Buffer.from(message));
-        console.log(`Message : ${message}`);
+        var data = [{
+            portNo: portNo,
+            phoneNo: "01726315133",
+            amount: 100
+         }];
+         
+        channel.sendToQueue(queueName, Buffer.from(JSON.stringify(data)));        // Send JOSN
+        // channel.sendToQueue(queueName, Buffer.from("Send a plain message"));   // Send plain message
+        console.log(data);
 
         return res.json({
             result : 'success',
-            data : message,
+            data : data,
             message : 'Data sent to subscriber',
         });
 
